@@ -12,7 +12,7 @@ To report a security issue, you can use any of the following methods:
 
 1. **Email:** Send an email to [omegacms@outlook.com](mailto:omegacms@outlook.com). Please provide a detailed description of the vulnerability.
 
-2. **GitHub Security Advisories:** If you prefer, you can use GitHub's security advisory features. Create a new security advisory directly on the [Security tab](https://github.com/omegacms/commands/security) of this repository.
+2. **GitHub Security Advisories:** If you prefer, you can use GitHub's security advisory features. Create a new security advisory directly on the [Security tab](https://github.com/omegacms/environment/security) of this repository.
 
 3. **Pull Request:** You can submit a Pull Request addressing the security issue. Ensure your Pull Request includes a clear description of the problem and the solution. We appreciate your collaboration in directly contributing to the security of the project.
 

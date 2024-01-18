@@ -1,4 +1,4 @@
-# Commands Package
+# Environment Package
 
 The commands package contains commands for various administrative task.
 
@@ -8,12 +8,12 @@ The commands package contains commands for various administrative task.
 
 ## Installation via Composer
 
-Add `"omegacms/commands": "^1.0.0"` to the require block in your `composer.json` file and then run `composer install`.
+Add `"omegacms/environment": "^1.0.0"` to the require block in your `composer.json` file and then run `composer install`.
 
 ```json
 {
     "require": {
-        "omegacms/commands": "^1.0.0"
+        "omegacms/environment": "^1.0.0"
     }
 }
 ```
@@ -21,13 +21,13 @@ Add `"omegacms/commands": "^1.0.0"` to the require block in your `composer.json`
 Alternatively, you can simply run the folowing from the command line:
 
 ```sh
-composer require omegacms/commands "^1.0.0"
+composer require omegacms/environment "^1.0.0"
 ```
 
 If you want to include the test sources, use:
 
 ```sh
-composer require --prefer-source omegacms/commands "^1.0.0"
+composer require --prefer-source omegacms/environment "^1.0.0"
 ```
 
 ## Documentation
@@ -44,7 +44,7 @@ composer require --prefer-source omegacms/commands "^1.0.0"
 
 ## Contributing
 
-If you'd like to contribute to the OmegaCMS Commands package, please follow our [contribution guidelines](CONTRIBUTING.md).
+If you'd like to contribute to the OmegaCMS Environment package, please follow our [contribution guidelines](CONTRIBUTING.md).
 
 ## License
 
