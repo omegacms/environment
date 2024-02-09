@@ -25,9 +25,9 @@ use function pcntl_async_signals;
 use function pcntl_signal;
 use function strtoupper;
 use function substr;
+use function Omega\Filesystem\get_operating_system;
 use Omega\Helpers\App;
 use Omega\Helpers\Alias;
-use Omega\Helpers\System;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -101,7 +101,7 @@ class ServeCommand extends Command
             );
         }
 
-        if ( System::getOperatingSystem() === 'windows' ) {
+        if ( get_operating_system() === 'windows' ) {
             $this->startServer( $host, $port, $output );
         } else {
             $this->handleSignals();
