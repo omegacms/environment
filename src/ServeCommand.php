@@ -25,7 +25,7 @@ use function pcntl_async_signals;
 use function pcntl_signal;
 use function strtoupper;
 use function substr;
-use function Omega\Filesystem\get_operating_system;
+use function Omega\Helpers\get_operating_system;
 use Omega\Helpers\App;
 use Omega\Helpers\Alias;
 use InvalidArgumentException;
