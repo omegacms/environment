@@ -25,9 +25,9 @@ use function pcntl_async_signals;
 use function pcntl_signal;
 use function strtoupper;
 use function substr;
+use function Omega\Helpers\app;
+use function Omega\Helpers\env;
 use function Omega\Helpers\get_operating_system;
-use Omega\Helpers\App;
-use Omega\Helpers\Alias;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -91,9 +91,9 @@ class ServeCommand extends Command
       */
     protected function execute( InputInterface $input, OutputInterface $output ) : int
     {
-        $base = App::application( 'paths.base' );
-        $host = $input->getOption( 'host' ) ?: Alias::env( 'APP_HOST', '127.0.0.1' );
-        $port = $input->getOption( 'port' ) ?: Alias::env( 'APP_PORT', '8000' );
+        $base = app( 'paths.base' );
+        $host = $input->getOption( 'host' ) ?: env( 'APP_HOST', '127.0.0.1' );
+        $port = $input->getOption( 'port' ) ?: env( 'APP_PORT', '8000' );
 
         if ( empty( $host ) || empty( $port ) ) {
             throw new InvalidArgumentException(
