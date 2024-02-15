@@ -16,7 +16,7 @@ declare( strict_types = 1 );
 /**
  * @namespace
  */
-namespace Omega\Environment;
+namespace Omega\Environment\Command;
 
 /**
  * @use
