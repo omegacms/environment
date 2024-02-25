@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of Omega CMS - Commands Package
+ * Part of Omega CMS - Environment Package
  *
  * @link       https://omegacms.github.io
  * @author     Adriano Giovannini <omegacms@outlook.com>
@@ -23,8 +23,6 @@ namespace Omega\Environment\Command;
  */
 use function pcntl_async_signals;
 use function pcntl_signal;
-use function strtoupper;
-use function substr;
 use function Omega\Helpers\app;
 use function Omega\Helpers\env;
 use function Omega\Helpers\get_operating_system;
@@ -41,7 +39,8 @@ use Symfony\Component\Process\Process;
  * The `ServeCommand` starts a development server using PHP's built-in web server.
  *
  * @category    Omega
- * @package     Omega\Commands
+ * @package     Omega\Environment
+ * @subpackage  Omega\Environment\Command
  * @link        https://omegacms.github.io
  * @author      Adriano Giovannini <omegacms@outlook.com>
  * @copyright   Copyright (c) 2022 Adriano Giovannini. (https://omegacms.github.io)
