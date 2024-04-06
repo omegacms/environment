@@ -166,4 +166,5 @@ class Env
 
                 return $value;
             });
-    }}
+    }
+}
