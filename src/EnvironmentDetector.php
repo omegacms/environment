@@ -22,7 +22,6 @@ namespace Omega\Environment;
  * @use
  */
 use function array_slice;
-use function call_user_func;
 use function explode;
 use function Omega\Helpers\head;
 use Closure;
@@ -72,7 +71,7 @@ class EnvironmentDetector
      */
     protected function detectWebEnvironment( Closure $callback ) : string
     {
-        return call_user_func( $callback );
+        return $callback();
     }
 
     /**
@@ -100,7 +99,7 @@ class EnvironmentDetector
     protected function getEnvironmentArgument( array $args ) : ?string
     {
         foreach ( $args as $i => $value ) {
-            if ( $value === '.env' ) {
+            if ( $value === '--env' ) {
                 return $args[ $i + 1 ] ?? null;
             }
 

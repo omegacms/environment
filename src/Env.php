@@ -27,6 +27,7 @@ use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
 use PhpOption\Option;
+use PhpOption\Some;
 use RuntimeException;
 
 /**
@@ -51,7 +52,7 @@ class Env
      *
      * @var bool $putenv True ig the putenv adapter is enabled.
      */
-    protected static $putenv = true;
+    protected static bool $putenv = true;
 
     /**
      * The environment repository instance.
@@ -139,9 +140,9 @@ class Env
      * strings like 'true', 'false', etc.
      *
      * @param  string $key Holds the environment variable key.
-     * @return mixed Return the current instance of Same or None
+     * @return Some Return the current instance of Same or None
      */
-    protected static function getOption( string $key ) : mixed
+    protected static function getOption( string $key ) : Some
     {
         return Option::fromValue( static::getRepository()->get( $key ) )
             ->map(function ( $value ) {
@@ -157,7 +158,7 @@ class Env
                         return '';
                     case 'null':
                     case '(null)':
-                        return;
+                        return null;
                 }
 
                 if ( preg_match( '/\A([\'"])(.*)\1\z/', $value, $matches ) ) {
