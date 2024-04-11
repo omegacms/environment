@@ -26,6 +26,8 @@ use function Omega\Helpers\value;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
+use Exception;
+use PhpOption\None;
 use PhpOption\Option;
 use PhpOption\Some;
 use RuntimeException;
@@ -123,6 +125,7 @@ class Env
      * @param  string  $key Holds the environment variable key.
      * @return mixed
      * @throws RuntimeException if environment variable has no value.
+     * @throws Exception
      */
     public static function getOrFail( string $key ) : mixed
     {
@@ -140,9 +143,9 @@ class Env
      * strings like 'true', 'false', etc.
      *
      * @param  string $key Holds the environment variable key.
-     * @return Some Return the current instance of Same or None
+     * @return Some|None Return the current instance of Same or None
      */
-    protected static function getOption( string $key ) : Some
+    protected static function getOption( string $key ) : Some|None
     {
         return Option::fromValue( static::getRepository()->get( $key ) )
             ->map(function ( $value ) {
