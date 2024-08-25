@@ -23,9 +23,6 @@ namespace Omega\Environment\Command;
  */
 use function pcntl_async_signals;
 use function pcntl_signal;
-use function Omega\Helpers\app;
-use function Omega\Helpers\env;
-use function Omega\Helpers\get_operating_system;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

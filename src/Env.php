@@ -22,7 +22,6 @@ namespace Omega\Environment;
  * @use
  */
 use function strtolower;
-use function Omega\Helpers\value;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;

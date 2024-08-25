@@ -23,18 +23,17 @@ namespace Omega\Environment;
  */
 use function array_slice;
 use function explode;
-use function Omega\Helpers\head;
 use Closure;
 use Omega\Support\Str;
 
 /**
  * Environment detector class.
  *
- * The 'EnvironmentDetector' class is designed to identify the operating environment within 
- * which an application is running, distinguishing between web-based and console-based environments. 
- * This class enables the application to adapt its behavior accordingly, allowing for seamless 
- * interaction and functionality across different platforms. By accurately detecting the environment, 
- * the class facilitates the execution of context-specific actions, ensuring optimal performance and 
+ * The 'EnvironmentDetector' class is designed to identify the operating environment within
+ * which an application is running, distinguishing between web-based and console-based environments.
+ * This class enables the application to adapt its behavior accordingly, allowing for seamless
+ * interaction and functionality across different platforms. By accurately detecting the environment,
+ * the class facilitates the execution of context-specific actions, ensuring optimal performance and
  * user experience across various deployment scenarios.
  *
  * @category    Omega
@@ -49,7 +48,7 @@ class EnvironmentDetector
 {
     /**
      * Detect the application's current environment.
-     * 
+     *
      * @param  Closure $callback    Holds the callback to use for detecting environment.
      * @param  ?array  $consoleArgs Holds an array of console arguments or null.
      * @return string Return the application's current environment.
@@ -65,7 +64,7 @@ class EnvironmentDetector
 
     /**
      * Set the application environment for a web request.
-     * 
+     *
      * @param  Closure $callback Holds the callback to use for detecting environment.
      * @return string Return the application's current environment.
      */
@@ -76,7 +75,7 @@ class EnvironmentDetector
 
     /**
      * Set the application environment from command-line arguments.
-     * 
+     *
      * @param  Closure $callback Holds the callback to use for detecting environment.
      * @param  array   $args     Holds an array of arguments for the environment.
      * @return string Return the application's environment.
@@ -92,7 +91,7 @@ class EnvironmentDetector
 
     /**
      * Get the environment argument from the console.
-     * 
+     *
      * @param  array $args Holds an array of argument.
      * @return ?string Return the environment argument from the console.
      */
