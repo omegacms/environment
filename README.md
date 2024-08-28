@@ -32,7 +32,7 @@ composer require --prefer-source omegacms/environment "^1.0.0"
 
 ## Documentation
 
-Work in progress
+- [Dotenv Documentation](docs/Dotenv.md)
 
 ## Contributing
 
