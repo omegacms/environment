@@ -106,5 +106,7 @@ class EnvironmentDetector
                 return head( array_slice( explode( "=", $value ), 1 ) );
             }
         }
+
+        return null;
     }
 }
