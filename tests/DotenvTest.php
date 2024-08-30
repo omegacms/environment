@@ -22,7 +22,7 @@ namespace Omega\Environment\Tests;
  * @use
  */
 use Omega\Environment\Dotenv;
-use PHPUnit\Framework\TestCase;
+use Omega\Testing\TestCase as BaseTestCase;
 
 /**
  * Dotenv test class.
@@ -40,7 +40,7 @@ use PHPUnit\Framework\TestCase;
  * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
  * @version     1.0.0
  */
-class DotenvTest extends TestCase
+class DotenvTest extends BaseTestCase
 {
     /**
      * Tear down.
@@ -204,14 +204,17 @@ class DotenvTest extends TestCase
      */
     public function testItThrowsMissingVarException()
     {
-        $this->expectException( '\Omega\Environment\Exception\MissingVariableException' );
-
-        Dotenv::setRequired( [ 
+        // Imposta le variabili richieste
+        Dotenv::setRequired([
             'DB_HOST', 
-            'DB_TYPE' 
-        ] );
-        
-        Dotenv::load( __DIR__ . '/fixtures', '.env.test' ) ;
+            'DB_TYPE'
+        ]);
+    
+        // Aspettati che venga lanciata un'eccezione
+        $this->expectException(\Omega\Environment\Exception\MissingVariableException::class);
+    
+        // Carica il file .env.test che non contiene le variabili richieste
+        Dotenv::load(__DIR__ . '/fixtures', '.env.test');
     }
 
     /**
@@ -223,9 +226,10 @@ class DotenvTest extends TestCase
      * 
      * @return void
      */
+
     public function testItThrowIsMissingVarExceptionEvenAfterLoad()
     {
-        $this->expectException( '\Omega\Environment\Exception\MissingVariableException' );
+        $this->expectException( \Omega\Environment\Exception\MissingVariableException::class );
 
         Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
 
@@ -234,7 +238,7 @@ class DotenvTest extends TestCase
             'DB_TYPE'
         ] );
     }
-
+    
     /**
      * Test it does not throw missing var exception if all required vars are set.
      * 
@@ -245,15 +249,15 @@ class DotenvTest extends TestCase
      */
     public function testItDoesNotThrowMissingVarExceptionIfAllRequiredVarsAreSet()
     {
-        Dotenv::setRequired( [
-            'DB_USER', 
+        Dotenv::setRequired([
+            'DB_USER',
             'DB_PASSWORD'
-        ] );
+        ]);
         
-        Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
+        Dotenv::load(__DIR__ . '/fixtures', '.env.test');
 
-        $this->assertArrayHasKey( 'DB_USER', Dotenv::all() );
-        $this->assertArrayHasKey( 'DB_PASSWORD', Dotenv::all() );
+        $this->assertArrayHasKey('DB_USER', Dotenv::all());
+        $this->assertArrayHasKey('DB_PASSWORD', Dotenv::all());
     }
 
     /**
