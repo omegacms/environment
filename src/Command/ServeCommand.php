@@ -61,6 +61,16 @@ class ServeCommand extends Command
     private Process $process;
 
     /**
+     * Command constructor.
+     * 
+     * @return void 
+     */
+    public function __construct()
+    {
+        parent::__construct( 'serve' );
+    }
+
+    /**
      * Configures the current command.
      *
      * @return void
