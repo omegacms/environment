@@ -41,7 +41,7 @@ composer require --prefer-source omegacms/environment "^1.0.0"
 
 ## Customizing the Integrated Server
 
-You can adjust the test server specifications to meet your needs by simply editing the .env file and customizing the following variables:
+You can adjust the test server specifications to meet your needs by simply editing the `.env` file and customizing the following variables:
 
 ```
 APP_HOST=your_host_here
