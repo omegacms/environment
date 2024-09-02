@@ -136,13 +136,15 @@ class DotenvTest extends BaseTestCase
      * * Retrieving an existing variable with a default value (`DB_USER`, `foo`).
      * * Retrieving a non-existent variable (`DB_PASSWORD`).
      * * Retrieving a non-existent variable with a default value (`DB_PASSWORD`, `foo`).
+     * 
+     * @return void
      */
-    public function testGetMethod()
+    public function testGetMethod() : void
     {
         Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
 
         Dotenv::set( [
-            'DB_PASSWORD' => null,
+            'DB_PASSWORD' => '',
         ] );
 
         $this->assertSame( 'root', Dotenv::get( 'DB_USER'            ) );

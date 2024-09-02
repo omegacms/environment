@@ -98,12 +98,22 @@ class ServeCommand extends Command
     protected function execute( InputInterface $input, OutputInterface $output ) : int
     {
         $base = app( 'paths.base' );
-        $host = $input->getOption( 'host' ) ?: env( 'APP_HOST', '127.0.0.1' );
-        $port = $input->getOption( 'port' ) ?: env( 'APP_PORT', '8000' );
+
+        $hostOption = $input->getOption( 'host' );
+        $portOption = $input->getOption( 'port' );
+
+        $host = is_string( $hostOption ) ? $hostOption : env( 'APP_HOST', '127.0.0.1' );
+        $port = is_string( $portOption ) ? $portOption : env( 'APP_PORT', '8000' );
+
+        if ( ! is_string( $host ) || ! is_string( $port ) || ! is_string( $base ) ) {
+            throw new InvalidArgumentException(
+                "APP_HOST, APP_PORT, and base path must all be strings."
+            );
+        }
 
         if ( empty( $host ) || empty( $port ) ) {
             throw new InvalidArgumentException(
-                'APP_HOST and APP_PORT both need values'
+                "APP_HOST and APP_PORT both need values."
             );
         }
 
@@ -141,7 +151,7 @@ class ServeCommand extends Command
      * @param string $host Holds the host name or IP address to bind the server to.
      * @param string $port Holds the port to use for the server.
      * @param string $base Holds the base path of the application.
-     * @return array Return an array of command parameters for starting the server.
+     * @return string[] Return an array of command parameters for starting the server.
      */
     private function command( string $host, string $port, string $base ) : array
     {

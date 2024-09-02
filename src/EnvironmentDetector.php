@@ -49,8 +49,8 @@ class EnvironmentDetector
     /**
      * Detect the application's current environment.
      *
-     * @param  Closure $callback    Holds the callback to use for detecting environment.
-     * @param  ?array  $consoleArgs Holds an array of console arguments or null.
+     * @param  Closure        $callback    Holds the callback to use for detecting environment.
+     * @param  ?array<string> $consoleArgs Holds an array of console arguments or null.
      * @return string Return the application's current environment.
      */
     public function detect( Closure $callback, ?array $consoleArgs = null ) : string
@@ -76,8 +76,8 @@ class EnvironmentDetector
     /**
      * Set the application environment from command-line arguments.
      *
-     * @param  Closure $callback Holds the callback to use for detecting environment.
-     * @param  array   $args     Holds an array of arguments for the environment.
+     * @param  Closure       $callback Holds the callback to use for detecting environment.
+     * @param  array<string> $args     Holds an array of arguments for the environment.
      * @return string Return the application's environment.
      */
     protected function detectConsoleEnvironment( Closure $callback, array $args = [] ) : string
@@ -92,7 +92,7 @@ class EnvironmentDetector
     /**
      * Get the environment argument from the console.
      *
-     * @param  array $args Holds an array of argument.
+     * @param  array<string> $args Holds an array of argument.
      * @return ?string Return the environment argument from the console.
      */
     protected function getEnvironmentArgument( array $args ) : ?string
@@ -103,7 +103,8 @@ class EnvironmentDetector
             }
 
             if ( Str::startsWith( $value, '--env' ) ) {
-                return head( array_slice( explode( "=", $value ), 1 ) );
+                $explodedValue = explode( "=", $value );
+                return $explodedValue[ 1 ] ?? null;
             }
         }
 

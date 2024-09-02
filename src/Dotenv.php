@@ -21,20 +21,18 @@ namespace Omega\Environment;
 /**
  * @use
  */
-use function array_merge;
 use function explode;
 use function file;
 use function file_exists;
 use function is_dir;
 use function is_array;
-use function is_object;
 use function preg_match;
 use function putenv;
 use function rtrim;
-use function serialize;
 use function strpos;
 use function trim;
 use Exception;
+use InvalidArgumentException;
 use Omega\Environment\Exception\MissingVariableException;
 
 /**
@@ -59,14 +57,14 @@ class Dotenv
     /**
      * Key-value storage.
      *
-     * @var array $variables Holds an array of the key-value storage.
+     * @var array<string, string> $variables Holds an array of the key-value storage.
      */
     protected static $variables = [];
 
     /**
      * Required variables.
      *
-     * @var array $required Holds an array of required variables.
+     * @var array<int, string> $required Holds an array of required variables.
      */
     protected static $required = [];
 
@@ -114,28 +112,36 @@ class Dotenv
         }
     
         $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
-            if (strpos(trim($line), '#') === 0) {
-                continue; // skip comments
+        if ( $lines !== false ) {
+            foreach ( $lines as $line ) {
+                if ( strpos( trim( $line ), '#' ) === 0 ) {
+                    continue;
+                }
+    
+                $parts = explode( '=', $line, 2 );
+                if ( count( $parts ) !== 2 ) {
+                    throw new Exception(
+                        "Invalid line in .env file: $line"
+                    );
+                }
+    
+                list( $key, $value ) = $parts;
+                $key                 = trim( $key );
+                $value               = trim( $value );
+    
+                if ( preg_match( '/\s/', $key ) || $key == '' ) {
+                    throw new Exception(
+                        "Invalid key in .env file: $key"
+                    );
+                }
+    
+                $value                   = trim( $value, "\"'" );  
+                self::$variables[ $key ] = $value;
             }
-    
-            $parts = explode('=', $line, 2);
-            if (count($parts) !== 2) {
-                throw new \Exception("Invalid line in .env file: $line");
-            }
-    
-            list($key, $value) = $parts;
-    
-            $key = trim($key);
-            $value = trim($value);
-    
-            if (preg_match('/\s/', $key) || $key == '') {
-                throw new \Exception("Invalid key in .env file: $key");
-            }
-    
-            $value = trim($value, "\"'");
-    
-            self::$variables[$key] = $value;
+        } else {
+            throw new Exception(
+                "Unable to read the .env file: $envFile"
+            );
         }
     
         self::$isLoaded = true;
@@ -152,10 +158,6 @@ class Dotenv
     public static function copyVarsToPutenv( string $prefix = 'PHP_' ) : void
     {
         foreach ( self::all() as $key => $value)  {
-            if ( is_object( $value ) || is_array( $value ) ) {
-                $value = serialize( $value );
-            }
-
             putenv( "{$prefix}{$key}={$value}" );
         }
     }
@@ -187,7 +189,7 @@ class Dotenv
     /**
      * Get env variables.
      *
-     * @return array Return an array with all environment variables.
+     * @return array<string, string> Return an array with all environment variables.
      */
     public static function all() : array
     {
@@ -209,14 +211,26 @@ class Dotenv
     /**
      * Set an environment variable.
      *
-     * @param string|array $keys  Holds a single variable key or an array of variable keys.
-     * @param mixed        $value Holds the value for the key, or null if an array of keys is provided.
+     * @param string|array<string, string> $keys  Holds a single variable key or an array of variable keys.
+     * @param mixed                        $value Holds the value for the key, or null if an array of keys is provided.
      * @return void
+     * @throws InvalidArgumentException if the values not are a string.
      */
     public static function set( string|array $keys, mixed $value = null ) : void
     {
-        if ( is_array( $keys ) ) {
-            self::$variables = array_merge( self::$variables, $keys );
+        if ( is_array ($keys ) ) {
+            foreach ( $keys as $k => $v ) {
+                if ( ! is_string( $v ) ) {
+                    throw new InvalidArgumentException(
+                        "All values must be a string."
+                    );
+                }
+                self::$variables[ $k ] = $v;
+            }
+        } elseif ( ! is_string( $value ) ) {
+            throw new InvalidArgumentException(
+                "Value must be a string."
+            );
         } else {
             self::$variables[ $keys ] = $value;
         }
@@ -225,7 +239,7 @@ class Dotenv
     /**
      * Set required variables.
      *
-     * @param  array $variables Holds an array of variables.
+     * @param  array<int, string> $variables Holds an array of variables.
      * @return void
      */
     public static function setRequired( array $variables ) : void
