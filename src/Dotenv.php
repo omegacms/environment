@@ -21,6 +21,7 @@ namespace Omega\Environment;
 /**
  * @use
  */
+use function array_key_exists;
 use function explode;
 use function file;
 use function file_exists;
@@ -205,7 +206,11 @@ class Dotenv
     */
     public static function get( string $key, mixed $default = null ) : mixed
     {
-        return isset( self::$variables[ $key ] ) ? self::$variables[ $key ] : $default;
+        if ( array_key_exists( $key, self::$variables ) && self::$variables[ $key ] !== '' ) {
+            return self::$variables[ $key ];
+        }
+    
+        return $default;
     }
 
     /**
