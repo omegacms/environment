@@ -70,13 +70,12 @@ class DotenvTest extends TestCase
      * @return void
      */
      #[Test]
-     #[TestDox('
-     Test it can load .env file and gives access to var using all.
-     
-     This test simulates loading the .env.test file and asserts that the loaded
-     variables can be accessed using the all() method. It also verifies that the
-     loaded variables match the expected values.
-     ')]
+     #[TestDox('Test it can load .env file and gives access to var using all.
+
+    This test simulates loading the .env.test file and asserts that the loaded
+    variables can be accessed using the all() method. It also verifies that the
+    loaded variables match the expected values.
+    ')]
     public function itCanLoadEnvFileAndGivesAccessToVarsUsingAll() : void
     {
         Dotenv::flush();
@@ -96,27 +95,26 @@ class DotenvTest extends TestCase
 
     /**
      * Test it can load array.
-     * 
-     * Similar to the previous test, this test loads the `.env.test` file and asserts that 
+     *
+     * Similar to the previous test, this test loads the `.env.test` file and asserts that
      * the loaded variables accessible through `all()` match the expected values.
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it can load array.
+    #[TestDox('Test it can load array.
 
-    Similar to the previous test, this test loads the .env.test file and asserts that 
+    Similar to the previous test, this test loads the .env.test file and asserts that
     the loaded variables accessible through all() match the expected values.
-    ')] 
+    ')]
     public function itCanLoadArray() : void
     {
     	Dotenv::flush();
 
         Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
-    
+
         $loadedVariables = Dotenv::all();
-    
+
         $expected = [
             'DB_USER'         => 'root',
             'DB_PASSWORD'     => 'secret',
@@ -124,26 +122,26 @@ class DotenvTest extends TestCase
             'TEST_USER'       => 'root',
             'TEST_SOME_ARRAY' => 'FOO',
         ];
-    
+
         $this->assertSame( $expected, $loadedVariables );
     }
 
     /**
      * Flush method.
-     * 
-     * This test loads the `.env.test` file and then uses the `flush()` method to clear 
-     * the loaded variables. Finally, it asserts that `all()` returns an empty array 
+     *
+     * This test loads the `.env.test` file and then uses the `flush()` method to clear
+     * the loaded variables. Finally, it asserts that `all()` returns an empty array
      * after flushing.
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Flush method.
-    
-    This test loads the .env.test file and then uses the `flush()` method to clear 
-    the loaded variables. Finally, it asserts that all() returns an empty array 
-    after flushing.')]
+    #[TestDox('Flush method.
+
+    This test loads the .env.test file and then uses the `flush()` method to clear
+    the loaded variables. Finally, it asserts that all() returns an empty array
+    after flushing.
+    ')]
     public function flushMethod() : void
     {
         Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
@@ -155,20 +153,19 @@ class DotenvTest extends TestCase
 
     /**
      * Get method.
-     * 
+     *
      * This test loads the .env.test file and tests the behavior of the get() method in various scenarios:
-     * 
+     *
      * * Retrieving an existing variable (`DB_USER`).
      * * Retrieving an existing variable with a default value (`DB_USER`, `foo`).
      * * Retrieving a non-existent variable (`DB_PASSWORD`).
      * * Retrieving a non-existent variable with a default value (`DB_PASSWORD`, `foo`).
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Get method.
-    
+    #[TestDox('Get method.
+
     This test loads the .env.test file and tests the behavior of the get() method in various scenarios:
      * Retrieving an existing variable (`DB_USER`).
      * Retrieving an existing variable with a default value (`DB_USER`, `foo`).
@@ -191,19 +188,18 @@ class DotenvTest extends TestCase
 
     /**
      * Test set method with two array.
-     * 
-     * This test loads the `.env.test` file and then uses the `set()` method with two 
-     * arguments to update the value of a specific variable (`DB_PASSWORD`). It then 
+     *
+     * This test loads the `.env.test` file and then uses the `set()` method with two
+     * arguments to update the value of a specific variable (`DB_PASSWORD`). It then
      * asserts that the updated value is accessible through `get()`.
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test set method with two array.
- 
-    This test loads the `.env.test` file and then uses the `set()` method with two 
-    arguments to update the value of a specific variable (`DB_PASSWORD`). It then 
+    #[TestDox('Test set method with two array.
+
+    This test loads the `.env.test` file and then uses the `set()` method with two
+    arguments to update the value of a specific variable (`DB_PASSWORD`). It then
     asserts that the updated value is accessible through `get()`.
     ')]
     public function setMethodWithTwoArgs() : void
@@ -211,26 +207,25 @@ class DotenvTest extends TestCase
         Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
 
         Dotenv::set( 'DB_PASSWORD', 'secret' );
-        
+
         $this->assertSame( 'root',   Dotenv::get( 'DB_USER'     ) );
         $this->assertSame( 'secret', Dotenv::get( 'DB_PASSWORD' ) );
     }
 
     /**
      * Test set method with array.
-     * 
-     * This test loads the .env.test file and then uses the `set()` method with 
-     * an array to update the values of multiple variables. It asserts that the 
+     *
+     * This test loads the .env.test file and then uses the `set()` method with
+     * an array to update the values of multiple variables. It asserts that the
      * updated values are accessible through `get()`.
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test set method with array.
+    #[TestDox('Test set method with array.
 
     This test loads .env.test file and then uses the set()( method with
-    an array to update the values of multiple variables. It assert that 
+    an array to update the values of multiple variables. It assert that
     the updated values are accessible through get().
     ')]
     public function setMethodWithArray() : void
@@ -249,19 +244,18 @@ class DotenvTest extends TestCase
 
     /**
      * Test it throws missing var exception.
-     * 
-     * This test tests the behavior when required environment variables are not defined in 
-     * the loaded `.env.test` file. It sets required variables (`DB_HOST`, `DB_TYPE`) and 
+     *
+     * This test tests the behavior when required environment variables are not defined in
+     * the loaded `.env.test` file. It sets required variables (`DB_HOST`, `DB_TYPE`) and
      * expects a `MissingVariableException` to be thrown during loading.
-     * 
+     *
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it throws missing var exception.
-     
-    This test tests the behavior when required environment variables are not defined in 
-    the loaded `.env.test` file. It sets required variables (`DB_HOST`, `DB_TYPE`) and 
+    #[TestDox('Test it throws missing var exception.
+
+    This test tests the behavior when required environment variables are not defined in
+    the loaded `.env.test` file. It sets required variables (`DB_HOST`, `DB_TYPE`) and
     expects a `MissingVariableException` to be thrown during loading.
     ')]
     public function itThrowsMissingVarException() : void
@@ -287,9 +281,8 @@ class DotenvTest extends TestCase
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it throws is missing var exception even after load.
-    
+    #[TestDox('Test it throws is missing var exception even after load.
+
     Similar to the previous test, this test loads the `.env.test` file and then sets required
     variables (`DB_HOST`, `DB_TYPE`). It expects a `MissingVariableException` to be thrown
     regardless of the prior loading.
@@ -315,9 +308,8 @@ class DotenvTest extends TestCase
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it does not throw missing var exception if all required vars are set.
-    
+    #[TestDox('Test it does not throw missing var exception if all required vars are set.
+
     This test sets required variables (`DB_USER`, `DB_PASSWORD`) and then loads the `.env.test` file.
     It verifies that the loading is successful and the required variables are accessible through `all()`.
     ')]
@@ -344,9 +336,8 @@ class DotenvTest extends TestCase
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it can copy vars to putenv.
-    
+    #[TestDox('Test it can copy vars to putenv.
+
     This test loads the `.env.test` file and then uses `copyVarsToPutenv()` to
     copy the loaded variables to the putenv function. It asserts that the copied
     variables are accessible through the `getenv()` function.
@@ -362,35 +353,6 @@ class DotenvTest extends TestCase
     }
 
     /**
-     * Test it can copy vars to env.
-     *
-     * This test loads the `.env.test` file and then uses `copyVarsToEnv()` to copy
-     * the loaded variables to the `$_ENV` superglobal. It asserts that the copied
-     * variables are accessible through `$_ENV`.
-     *
-     * @return void
-     */
-    #[Test]
-    #[TestDox('
-    Test it can copy vars to env.
-    
-    This test loads the `.env.test` file and then uses `copyVarsToEnv()` to copy
-    the loaded variables to the `$_ENV` superglobal. It asserts that the copied
-    variables are accessible through `$_ENV`.
-    ')]    
-    public function testItCanCopyVarsToEnv() : void
-    {
-        Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
-
-        Dotenv::copyVarsToEnv();
-
-        $this->assertSame( 'root', $_ENV[ 'TEST_USER'       ] );
-        $this->assertSame(  'FOO', $_ENV[ 'TEST_SOME_ARRAY' ] );
-
-        unset( $_ENV[ 'TEST_USER' ], $_ENV[ 'TEST_SOME_ARRAY' ] );
-    }
-
-    /**
      * Test it can copy vars to server.
      *
      * This test loads the `.env.test` file and then uses `copyVarsToServer()` to copy the
@@ -400,12 +362,11 @@ class DotenvTest extends TestCase
      * @return void
      */
     #[Test]
-    #[TestDox('
-    Test it can copy vars to server.
-    
+    #[TestDox('Test it can copy vars to server.
+
     This test loads the `.env.test` file and then uses `copyVarsToServer()` to copy the
     loaded variables to the `$_SERVER` superglobal. It asserts that the copied variables
-    are accessible through `$_SERVER`.
+    are accessible through `$_SERVER` global variables.
     ')]
     public function itCanCopyVarsToServer() : void
     {
@@ -416,6 +377,34 @@ class DotenvTest extends TestCase
         $this->assertSame( 'root', $_SERVER[ 'TEST_USER'       ] );
         $this->assertSame(  'FOO', $_SERVER[ 'TEST_SOME_ARRAY' ] );
 
-        unset( $_SERVER[ 'TEST_USER' ], $_SERVER ['TEST_SOME_ARRAY' ] );
+        unset( $_SERVER[ 'TEST_USER' ], $_SERVER[ 'TEST_SOME_ARRAY' ] );
+    }
+
+    /**
+     * Test it can copy vars to env.
+     *
+     * This test loads the `.env.test` file and then uses `copyVarsToEnv()` to copy
+     * the loaded variables to the `$_ENV` superglobal. It asserts that the copied
+     * variables are accessible through `$_ENV`.
+     *
+     * @return void
+     */
+    #[Test]
+    #[TestDox('Test it can copy vars to server.
+
+    This test loads the `.env.test` file and then uses `copyVarsToEnv()` to copy the
+    loaded variables to the `$_ENV` superglobal. It asserts that the copied variables
+    are accessible through `$_ENV` global variables.
+    ')]
+    public function itCanCopyVarsToEnv() : void
+    {
+        Dotenv::load( __DIR__ . '/fixtures', '.env.test' );
+
+        Dotenv::copyVarsToEnv();
+
+        $this->assertSame( 'root', $_ENV[ 'TEST_USER'       ] );
+        $this->assertSame(  'FOO', $_ENV[ 'TEST_SOME_ARRAY' ] );
+
+        unset( $_ENV[ 'TEST_USER' ], $_ENV[ 'TEST_SOME_ARRAY' ] );
     }
 }
