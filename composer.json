@@ -20,7 +20,7 @@
   },
   "require-dev": {
     "omegacms/testing": "^1.0.0",
-    "phpunit/phpunit": "^9.5",
+    "phpunit/phpunit": "^10.3",
     "symfony/process": "^7.1",
     "phpstan/phpstan": "^1.12"
   },
