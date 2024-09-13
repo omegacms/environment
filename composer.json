@@ -23,8 +23,5 @@
       "Omega\\Environment\\": "src/"
     }
   },
-  "scripts": {
-    "test": "vendor/bin/phpunit"
-  },
   "minimum-stability": "stable"
 }
