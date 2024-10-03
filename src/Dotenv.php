@@ -46,7 +46,7 @@ use Omega\Environment\Exception\MissingVariableException;
  * both speed and security by avoiding direct manipulation of `$_ENV` or `$_SERVER` by default.
  *
  * @category    Omega
- * @package     Omega\Environment
+ * @package     Environment
  * @link        https://omegacms.github.io
  * @author      Adriano Giovannini <omegacms@outlook.com>
  * @copyright   Copyright (c) 2024 Adriano Giovannini. (https://omegacms.github.io)

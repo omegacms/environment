@@ -35,8 +35,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * The `ServeCommand` starts a development server using PHP's built-in web server.
  *
  * @category    Omega
- * @package     Omega\Environment
- * @subpackage  Omega\Environment\Command
+ * @package     Environment
+ * @subpackage  Command
  * @link        https://omegacms.github.io
  * @author      Adriano Giovannini <omegacms@outlook.com>
  * @copyright   Copyright (c) 2024 Adriano Giovannini. (https://omegacms.github.io)
